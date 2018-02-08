@@ -1,5 +1,7 @@
 package com.boboddy.pwned.model
 
+import java.io.Serializable
+
 /**
  * Created by nicke on 2/4/2018.
  */
@@ -16,4 +18,4 @@ class Breach(
         val IsFabricated: Boolean,
         val IsSensitive: Boolean,
         val IsActive: Boolean,
-        val IsSpamList: Boolean)
+        val IsSpamList: Boolean) : Serializable
