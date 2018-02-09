@@ -7,26 +7,26 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.boboddy.pwned.R
 import com.boboddy.pwned.model.Breach
+import com.boboddy.pwned.util.endpointUrl
+import com.squareup.picasso.Picasso
 
 /**
  * Created by nicke on 2/6/2018.
  */
 
-class PwnListAdapter(context: Context) : BaseAdapter() {
+class PwnListAdapter(val context: Context) : BaseAdapter() {
 
-    var dataSet: List<Breach>
+    var dataSet: List<Breach> = emptyList()
 
-    val inflator: LayoutInflater
+    private val inflator: LayoutInflater = LayoutInflater.from(context)
 
-    init {
-        inflator = LayoutInflater.from(context)
-
-        dataSet = emptyList()
-    }
+//    val context = context
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val breach = dataSet[position]
         var view = convertView
-        var viewHolder: PwnListHolder? = null
+        var viewHolder: PwnListHolder?
+
         if (view != null) {
             viewHolder = view.tag as PwnListHolder
         } else {
@@ -35,7 +35,10 @@ class PwnListAdapter(context: Context) : BaseAdapter() {
             view.tag = viewHolder
         }
 
-        viewHolder.label.text = dataSet[position].Name
+        viewHolder.label.text = breach.Title
+//        val logoUrl = endpointUrl + breach.Name + "." + breach.LogoType
+        val logoUrl = "http://i.imgur.com/DvpvklR.png"
+        Picasso.with(context).load(logoUrl).into(viewHolder.logo)
         return view!!
     }
 

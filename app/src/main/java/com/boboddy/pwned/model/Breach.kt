@@ -18,4 +18,5 @@ class Breach(
         val IsFabricated: Boolean,
         val IsSensitive: Boolean,
         val IsActive: Boolean,
-        val IsSpamList: Boolean) : Serializable
+        val IsSpamList: Boolean,
+        val LogoType: String) : Serializable
