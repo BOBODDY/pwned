@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">pwned</string>
     <string name="title_activity_pwn_detail">PwnDetailActivity</string>
+    <string name="detail_compromised_data_header">Compromised data</string>
 </resources>
