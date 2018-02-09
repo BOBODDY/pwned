@@ -2,4 +2,6 @@
     <string name="app_name">pwned</string>
     <string name="title_activity_pwn_detail">PwnDetailActivity</string>
     <string name="detail_compromised_data_header">Compromised data</string>
+    <string name="list_email_hint">Email address</string>
+    <string name="list_status_default">Status will appear here</string>
 </resources>

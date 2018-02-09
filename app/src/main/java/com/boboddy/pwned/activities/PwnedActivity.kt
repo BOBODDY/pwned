@@ -16,6 +16,8 @@ import com.boboddy.pwned.list.PwnListAdapter
 import com.boboddy.pwned.model.Breach
 import com.boboddy.pwned.util.breachKey
 import com.boboddy.pwned.util.endpointUrl
+import com.boboddy.pwned.util.pwnedText
+import com.boboddy.pwned.util.safeText
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -99,13 +101,15 @@ class PwnedActivity : AppCompatActivity() {
             super.onPostExecute(result)
 
             if (result != null && result.isNotEmpty()) {
-                pwnedStatus.text = "PWNED"
+                pwnedStatus.text = pwnedText
+                pwnedStatus.setTextColor(resources.getColor(R.color.pwnedColor))
 
                 pwnAdapter.dataSet = result
                 pwnAdapter.notifyDataSetChanged()
                 pwnedList.visibility = View.VISIBLE
             } else {
-                pwnedStatus.text = "SAFE"
+                pwnedStatus.text = safeText
+                pwnedStatus.setTextColor(resources.getColor(R.color.safeColor))
                 pwnedList.visibility = View.GONE
             }
         }
