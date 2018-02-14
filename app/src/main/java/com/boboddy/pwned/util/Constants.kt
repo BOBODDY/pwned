@@ -7,6 +7,7 @@ import android.graphics.Color
  */
 
 val endpointUrl: String = "https://haveibeenpwned.com/api/v2/"
+val imageUrl: String = "https://haveibeenpwned.com/Content/Images/PwnedLogos/"
 
 val breachKey = "breach"
 
