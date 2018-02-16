@@ -73,21 +73,21 @@ class PwnDetailActivity : AppCompatActivity() {
         breachPwnCount.text = breach.PwnCount.toString() + " affected"
 
         if (breach.IsActive) {
-            isActiveIcon.setImageResource(R.mipmap.ic_active)
+            isActiveIcon.setImageResource(R.mipmap.ic_check)
         } else {
-            isActiveIcon.setImageResource(R.mipmap.ic_inactive)
+            isActiveIcon.setImageResource(R.mipmap.ic_x)
         }
 
         if (breach.IsVerified) {
-            isVerifiedIcon.setImageResource(R.mipmap.ic_active)
+            isVerifiedIcon.setImageResource(R.mipmap.ic_check)
         } else {
-            isVerifiedIcon.setImageResource(R.mipmap.ic_inactive)
+            isVerifiedIcon.setImageResource(R.mipmap.ic_x)
         }
 
         if (breach.IsSpamList) {
-            isSpamIcon.setImageResource(R.mipmap.ic_active)
+            isSpamIcon.setImageResource(R.mipmap.ic_check)
         } else {
-            isSpamIcon.setImageResource(R.mipmap.ic_inactive)
+            isSpamIcon.setImageResource(R.mipmap.ic_x)
         }
 
         val compromisedData = listDataClasses(breach.DataClasses)

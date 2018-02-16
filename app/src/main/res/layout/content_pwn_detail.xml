@@ -118,7 +118,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/detail_separator3"
         app:layout_constraintTop_toBottomOf="@+id/detail_separator3"
-        app:srcCompat="@mipmap/ic_inactive" />
+        app:srcCompat="@mipmap/ic_x" />
 
     <TextView
         android:id="@+id/detail_is_verified_text"
@@ -140,7 +140,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/detail_is_verified_icon"
         app:layout_constraintTop_toBottomOf="@+id/detail_is_verified_icon"
-        app:srcCompat="@mipmap/ic_inactive" />
+        app:srcCompat="@mipmap/ic_x" />
 
     <TextView
         android:id="@+id/detail_is_active_text"
@@ -162,7 +162,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/detail_is_active_icon"
         app:layout_constraintTop_toBottomOf="@+id/detail_is_active_icon"
-        app:srcCompat="@mipmap/ic_inactive" />
+        app:srcCompat="@mipmap/ic_x" />
 
     <TextView
         android:id="@+id/detail_is_spam_text"
