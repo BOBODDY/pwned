@@ -1,21 +1,17 @@
 package com.boboddy.pwned.activities
 
-import android.media.Image
-import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindDimen
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.boboddy.pwned.R
 import com.boboddy.pwned.model.Breach
-import com.boboddy.pwned.model.DataClass
 import com.boboddy.pwned.util.breachKey
-
 import kotlinx.android.synthetic.main.activity_pwn_detail.*
 import java.text.NumberFormat
 import java.util.*
@@ -57,6 +53,7 @@ class PwnDetailActivity : AppCompatActivity() {
         ButterKnife.bind(this)
 
         // TODO Set Up as Home
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (intent != null) {
             val bundle = intent.extras
@@ -68,8 +65,19 @@ class PwnDetailActivity : AppCompatActivity() {
         }
     }
 
-    fun setupDetails(breach: Breach) {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupDetails(breach: Breach) {
         breachName.text = breach.Title
+        title = breach.Title
         breachDescription.text = Html.escapeHtml(breach.Description)
         breachDate.text = breach.BreachDate
         breachPwnCount.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(breach.PwnCount) + " affected"
