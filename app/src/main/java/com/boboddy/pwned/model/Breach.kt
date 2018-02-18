@@ -1,5 +1,6 @@
 package com.boboddy.pwned.model
 
+import com.boboddy.pwned.util.imageUrl
 import java.io.Serializable
 
 /**
@@ -19,4 +20,9 @@ class Breach(
         val IsSensitive: Boolean,
         val IsActive: Boolean,
         val IsSpamList: Boolean,
-        val LogoType: String) : Serializable
+        val LogoType: String) : Serializable {
+
+    fun getLogoUrl (): String {
+        return imageUrl + Name + "." + LogoType
+    }
+}

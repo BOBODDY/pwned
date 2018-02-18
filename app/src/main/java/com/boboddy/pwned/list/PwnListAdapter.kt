@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.boboddy.pwned.R
 import com.boboddy.pwned.model.Breach
-import com.boboddy.pwned.util.imageUrl
 import com.squareup.picasso.Picasso
 
 /**
@@ -34,9 +33,9 @@ class PwnListAdapter(val context: Context) : BaseAdapter() {
         }
 
         viewHolder.label.text = breach.Title
-        val logoUrl = imageUrl + breach.Name + "." + breach.LogoType
+
         // TODO: figure out how to load SVGs using Picasso
-        Picasso.with(context).load(logoUrl).into(viewHolder.logo)
+        Picasso.get().load(breach.getLogoUrl()).into(viewHolder.logo)
         return view!!
     }
 
