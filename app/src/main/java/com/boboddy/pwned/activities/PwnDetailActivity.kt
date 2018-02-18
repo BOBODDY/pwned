@@ -17,6 +17,8 @@ import com.boboddy.pwned.model.DataClass
 import com.boboddy.pwned.util.breachKey
 
 import kotlinx.android.synthetic.main.activity_pwn_detail.*
+import java.text.NumberFormat
+import java.util.*
 
 class PwnDetailActivity : AppCompatActivity() {
 
@@ -70,7 +72,7 @@ class PwnDetailActivity : AppCompatActivity() {
         breachName.text = breach.Title
         breachDescription.text = Html.escapeHtml(breach.Description)
         breachDate.text = breach.BreachDate
-        breachPwnCount.text = breach.PwnCount.toString() + " affected"
+        breachPwnCount.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(breach.PwnCount) + " affected"
 
         if (breach.IsActive) {
             isActiveIcon.setImageResource(R.mipmap.ic_check)
