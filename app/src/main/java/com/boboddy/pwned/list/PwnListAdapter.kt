@@ -14,15 +14,9 @@ import com.boboddy.pwned.model.Breach
 
 class PwnListAdapter(context: Context) : BaseAdapter() {
 
-    var dataSet: List<Breach>
+    var dataSet: List<Breach> = emptyList()
 
-    val inflator: LayoutInflater
-
-    init {
-        inflator = LayoutInflater.from(context)
-
-        dataSet = emptyList()
-    }
+    private val inflator: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view = convertView
