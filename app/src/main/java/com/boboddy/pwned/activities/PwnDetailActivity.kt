@@ -12,6 +12,7 @@ import butterknife.ButterKnife
 import com.boboddy.pwned.R
 import com.boboddy.pwned.model.Breach
 import com.boboddy.pwned.util.breachKey
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_pwn_detail.*
 import java.text.NumberFormat
 import java.util.*
@@ -102,6 +103,11 @@ class PwnDetailActivity : AppCompatActivity() {
 
         val compromisedData = listDataClasses(breach.DataClasses)
         breachDataClasses.text = compromisedData
+
+        Picasso.get()
+                .load(breach.getLogoUrl())
+                .placeholder(R.mipmap.ic_placeholder)
+                .into(breachLogo)
     }
 
     fun listDataClasses(classes: List<String>): String {

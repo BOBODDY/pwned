@@ -35,7 +35,10 @@ class PwnListAdapter(val context: Context) : BaseAdapter() {
         viewHolder.label.text = breach.Title
 
         // TODO: figure out how to load SVGs using Picasso
-        Picasso.get().load(breach.getLogoUrl()).into(viewHolder.logo)
+        Picasso.get()
+                .load(breach.getLogoUrl())
+                .placeholder(R.mipmap.ic_placeholder)
+                .into(viewHolder.logo)
         return view!!
     }
 
