@@ -21,8 +21,9 @@
         <activity
             android:name=".activities.PwnDetailActivity"
             android:label="@string/title_activity_pwn_detail"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activities.PwnedActivity" />
+            android:parentActivityName=".activities.PwnedActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.InfoActivity"></activity>
     </application>
 
 </manifest>

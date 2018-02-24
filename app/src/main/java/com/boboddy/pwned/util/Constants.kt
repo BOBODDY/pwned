@@ -16,3 +16,6 @@ val safeText = "SAFE"
 
 val pwnedColor = Color.parseColor("#9b2626")
 val safeColor = Color.parseColor("#269b51")
+
+val sharedPrefs = "sharedPrefs"
+val firstRunKey = "firstRunKey"

@@ -8,4 +8,11 @@
     <string name="detail_is_verified">Verified</string>
     <string name="detail_is_active">Active</string>
     <string name="detail_is_spam">Spam</string>
+
+    <string name="ok">OK</string>
+
+    <string name="attribution">Breach data comes from the haveibeenpwned.com website.</string>
+
+    <string name="first_run_title">Welcome</string>
+    <string name="first_run_info">Enter your email to see if any breaches contain your information.</string>
 </resources>
