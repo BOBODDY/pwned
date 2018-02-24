@@ -1,9 +1,13 @@
 package com.boboddy.pwned.activities
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,10 +18,7 @@ import com.boboddy.pwned.R
 import com.boboddy.pwned.api.IPwnedApi
 import com.boboddy.pwned.list.PwnListAdapter
 import com.boboddy.pwned.model.Breach
-import com.boboddy.pwned.util.breachKey
-import com.boboddy.pwned.util.endpointUrl
-import com.boboddy.pwned.util.pwnedText
-import com.boboddy.pwned.util.safeText
+import com.boboddy.pwned.util.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -46,6 +47,50 @@ class PwnedActivity : AppCompatActivity() {
         pwnAdapter = PwnListAdapter(this)
 
         pwnedList.adapter = pwnAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        showInfoAlertOnFirstRun()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_list_activity, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_info) {
+            val infoIntent = Intent(this, InfoActivity::class.java)
+            startActivity(infoIntent)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun showInfoAlertOnFirstRun(){
+        val sharedPrefs = getSharedPreferences(sharedPrefs, Context.MODE_PRIVATE)
+
+        val firstRun = sharedPrefs.getBoolean(firstRunKey, true)
+
+        if (firstRun) {
+            val alertBuilder = AlertDialog.Builder(this)
+
+            alertBuilder.setTitle(R.string.first_run_title)
+            alertBuilder.setMessage(R.string.first_run_info)
+
+            alertBuilder.setPositiveButton(R.string.ok, {
+                dialogInterface, i ->
+                dialogInterface.dismiss()
+            })
+
+            val dialog = alertBuilder.create()
+            dialog.show()
+
+            val editor = sharedPrefs.edit()
+            editor.putBoolean(firstRunKey, false)
+            editor.apply()
+        }
     }
 
     @OnClick(R.id.pwn_check)
