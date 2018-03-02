@@ -1,5 +1,6 @@
 package com.boboddy.pwned.activities
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.boboddy.pwned.R
 import com.boboddy.pwned.model.Breach
 import com.boboddy.pwned.util.breachKey
@@ -46,6 +48,9 @@ class PwnDetailActivity : AppCompatActivity() {
     @BindView(R.id.detail_is_spam_icon)
     lateinit var isSpamIcon: ImageView
 
+    @BindView(R.id.detail_what_mean)
+    lateinit var whatDoTheseMean: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pwn_detail)
@@ -74,6 +79,22 @@ class PwnDetailActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @OnClick(R.id.detail_what_mean)
+    fun showWhatTheseMean() {
+        val alertBuilder = AlertDialog.Builder(this)
+
+        alertBuilder.setTitle(R.string.explanation_title)
+        alertBuilder.setMessage(R.string.explanation_message)
+
+        alertBuilder.setPositiveButton(R.string.ok, {
+            dialogInterface, i ->
+            dialogInterface.dismiss()
+        })
+
+        val dialog = alertBuilder.create()
+        dialog.show()
     }
 
     private fun setupDetails(breach: Breach) {
