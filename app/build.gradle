@@ -36,4 +36,7 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.squareup.retrofit2:converter-moshi:2.3.0'
     implementation 'com.squareup.picasso:picasso:3.0.0-SNAPSHOT'
+    compile 'com.google.firebase:firebase-core:11.8.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
