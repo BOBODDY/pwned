@@ -100,7 +100,7 @@ class PwnDetailActivity : AppCompatActivity() {
     private fun setupDetails(breach: Breach) {
         breachName.text = breach.Title
         title = breach.Title
-        breachDescription.text = Html.escapeHtml(breach.Description)
+        breachDescription.text = Html.fromHtml(breach.Description, 0)
         breachDate.text = breach.BreachDate
         breachPwnCount.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(breach.PwnCount) + " affected"
 
