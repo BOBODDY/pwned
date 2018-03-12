@@ -56,6 +56,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Description"
+        android:textColorLink="@color/colorLink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_separator2" />
@@ -181,7 +182,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/whatDoTheseMean"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorLink"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_is_spam_text" />
