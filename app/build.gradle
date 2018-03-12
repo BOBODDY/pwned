@@ -8,7 +8,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.boboddy.pwned"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 26
 
         versionCode 1
@@ -35,7 +35,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.squareup.retrofit2:converter-moshi:2.3.0'
-    implementation 'com.squareup.picasso:picasso:3.0.0-SNAPSHOT'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     compile 'com.google.firebase:firebase-core:11.8.0'
 }
 

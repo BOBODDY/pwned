@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
@@ -100,7 +101,8 @@ class PwnDetailActivity : AppCompatActivity() {
     private fun setupDetails(breach: Breach) {
         breachName.text = breach.Title
         title = breach.Title
-        breachDescription.text = Html.escapeHtml(breach.Description)
+        breachDescription.text = Html.fromHtml(breach.Description, 0)
+        breachDescription.movementMethod = LinkMovementMethod.getInstance()
         breachDate.text = breach.BreachDate
         breachPwnCount.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(breach.PwnCount) + " affected"
 
@@ -124,6 +126,7 @@ class PwnDetailActivity : AppCompatActivity() {
 
         val compromisedData = listDataClasses(breach.DataClasses)
         breachDataClasses.text = compromisedData
+
 
         Picasso.get()
                 .load(breach.getLogoUrl())
