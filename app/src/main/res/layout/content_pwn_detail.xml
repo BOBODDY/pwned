@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.boboddy.pwned.activities.PwnDetailActivity"
+    tools:showIn="@layout/activity_pwn_detail">
+
+    <TextView
+        android:id="@+id/detail_breach_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Name"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/detail_breach_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/detail_breach_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Date"
+        app:layout_constraintStart_toEndOf="@+id/detail_breach_logo"
+        app:layout_constraintTop_toBottomOf="@+id/detail_breach_name" />
+
+    <View
+        android:id="@+id/detail_separator2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/detail_breach_date" />
+
+    <TextView
+        android:id="@+id/detail_breach_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Count"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_breach_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detail_breach_name" />
+
+    <TextView
+        android:id="@+id/detail_breach_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Description"
+        android:textColorLink="@color/colorLink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_separator2" />
+
+    <View
+        android:id="@+id/detail_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/detail_breach_description" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/detail_compromised_data_header"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_separator" />
+
+    <TextView
+        android:id="@+id/detail_data_classes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <ImageView
+        android:id="@+id/detail_breach_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <View
+        android:id="@+id/detail_separator3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/detail_data_classes" />
+
+    <ImageView
+        android:id="@+id/detail_is_verified_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Active icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detail_separator3"
+        app:layout_constraintTop_toBottomOf="@+id/detail_separator3"
+        app:srcCompat="@mipmap/ic_x" />
+
+    <TextView
+        android:id="@+id/detail_is_verified_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/detail_is_verified"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_is_verified_icon"
+        app:layout_constraintStart_toEndOf="@+id/detail_is_verified_icon"
+        app:layout_constraintTop_toTopOf="@+id/detail_is_verified_icon" />
+
+    <ImageView
+        android:id="@+id/detail_is_active_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Active icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detail_is_verified_icon"
+        app:layout_constraintTop_toBottomOf="@+id/detail_is_verified_icon"
+        app:srcCompat="@mipmap/ic_x" />
+
+    <TextView
+        android:id="@+id/detail_is_active_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/detail_is_active"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_is_active_icon"
+        app:layout_constraintStart_toEndOf="@+id/detail_is_active_icon"
+        app:layout_constraintTop_toTopOf="@+id/detail_is_active_icon" />
+
+    <ImageView
+        android:id="@+id/detail_is_spam_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Active icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detail_is_active_icon"
+        app:layout_constraintTop_toBottomOf="@+id/detail_is_active_icon"
+        app:srcCompat="@mipmap/ic_x" />
+
+    <TextView
+        android:id="@+id/detail_is_spam_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/detail_is_spam"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_is_spam_icon"
+        app:layout_constraintStart_toEndOf="@+id/detail_is_spam_icon"
+        app:layout_constraintTop_toTopOf="@+id/detail_is_spam_icon" />
+
+    <TextView
+        android:id="@+id/detail_what_mean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/whatDoTheseMean"
+        android:textColor="@color/colorLink"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_is_spam_text" />
+</android.support.constraint.ConstraintLayout>

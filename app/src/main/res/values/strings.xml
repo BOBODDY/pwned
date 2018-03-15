@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">pwned</string>
+    <string name="title_activity_pwn_detail">PwnDetailActivity</string>
+    <string name="detail_compromised_data_header">Compromised data</string>
+    <string name="list_email_hint">Email address</string>
+    <string name="list_status_default">Status will appear here</string>
+
+    <string name="detail_is_verified">Verified</string>
+    <string name="detail_is_active">Active</string>
+    <string name="detail_is_spam">Spam</string>
+
+    <string name="ok">OK</string>
+
+    <string name="attribution">Breach data comes from the haveibeenpwned.com website.</string>
+
+    <string name="whatDoTheseMean">What do these mean?</string>
+
+    <string name="explanation_title">What do these options mean?</string>
+    <string name="explanation_message">Sometimes legitimate data can be found in a breach, but it may not be possible to establish that it\'s a legitimate breach. These would be shown with an X next to Verified.\n\nOccasionally, large volumes of personal data are found being utilised for the purposes of sending targeted spam.</string>
+
+    <string name="first_run_title">Welcome</string>
+    <string name="first_run_info">Enter your email to see if any breaches contain your information.</string>
 </resources>
