@@ -1,4 +1,4 @@
-package com.boboddy.pwned.activities
+package com.mathewsmobile.pwned.activities
 
 import android.app.AlertDialog
 import android.content.Context
@@ -14,11 +14,11 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import butterknife.*
-import com.boboddy.pwned.R
-import com.boboddy.pwned.api.IPwnedApi
-import com.boboddy.pwned.list.PwnListAdapter
-import com.boboddy.pwned.model.Breach
-import com.boboddy.pwned.util.*
+import com.mathewsmobile.pwned.R
+import com.mathewsmobile.pwned.api.IPwnedApi
+import com.mathewsmobile.pwned.list.PwnListAdapter
+import com.mathewsmobile.pwned.model.Breach
+import com.mathewsmobile.pwned.util.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.boboddy.pwned"
+        applicationId "com.mathewsmobile.pwned"
         minSdkVersion 24
         targetSdkVersion 26
 

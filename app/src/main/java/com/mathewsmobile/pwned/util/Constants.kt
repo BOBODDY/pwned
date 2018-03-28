@@ -1,4 +1,4 @@
-package com.boboddy.pwned.util
+package com.mathewsmobile.pwned.util
 
 import android.graphics.Color
 
