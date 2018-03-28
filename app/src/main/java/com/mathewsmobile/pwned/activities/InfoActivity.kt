@@ -1,4 +1,4 @@
-package com.boboddy.pwned.activities
+package com.mathewsmobile.pwned.activities
 
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.boboddy.pwned.R
+import com.mathewsmobile.pwned.R
 
 class InfoActivity : AppCompatActivity() {
 

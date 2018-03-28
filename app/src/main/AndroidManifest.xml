@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.boboddy.pwned">
+    package="com.mathewsmobile.pwned">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PwnedActivity">
+        <activity android:name="com.mathewsmobile.pwned.activities.PwnedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.PwnDetailActivity"
+            android:name="com.mathewsmobile.pwned.activities.PwnDetailActivity"
             android:label="@string/title_activity_pwn_detail"
-            android:parentActivityName=".activities.PwnedActivity"
+            android:parentActivityName="com.mathewsmobile.pwned.activities.PwnedActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.InfoActivity"></activity>
+        <activity android:name="com.mathewsmobile.pwned.activities.InfoActivity"></activity>
     </application>
 
 </manifest>

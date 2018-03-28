@@ -1,8 +1,7 @@
-package com.boboddy.pwned.activities
+package com.mathewsmobile.pwned.activities
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -12,9 +11,9 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.boboddy.pwned.R
-import com.boboddy.pwned.model.Breach
-import com.boboddy.pwned.util.breachKey
+import com.mathewsmobile.pwned.R
+import com.mathewsmobile.pwned.model.Breach
+import com.mathewsmobile.pwned.util.breachKey
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_pwn_detail.*
 import java.text.NumberFormat
