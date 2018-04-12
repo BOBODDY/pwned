@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.bumptech.glide.Glide
 import com.mathewsmobile.pwned.R
 import com.mathewsmobile.pwned.model.Breach
 import com.squareup.picasso.Picasso
@@ -35,9 +36,12 @@ class PwnListAdapter(val context: Context) : BaseAdapter() {
         viewHolder.label.text = breach.Title
 
         // TODO: figure out how to load SVGs using Picasso
-        Picasso.get()
+//        Picasso.get()
+//                .load(breach.getLogoUrl())
+//                .placeholder(R.mipmap.ic_placeholder)
+//                .into(viewHolder.logo)
+        Glide.with(context)
                 .load(breach.getLogoUrl())
-                .placeholder(R.mipmap.ic_placeholder)
                 .into(viewHolder.logo)
         return view!!
     }

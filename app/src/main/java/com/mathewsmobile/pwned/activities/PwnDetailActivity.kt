@@ -89,7 +89,7 @@ class PwnDetailActivity : AppCompatActivity() {
         alertBuilder.setMessage(R.string.explanation_message)
 
         alertBuilder.setPositiveButton(R.string.ok, {
-            dialogInterface, i ->
+            dialogInterface, _ ->
             dialogInterface.dismiss()
         })
 

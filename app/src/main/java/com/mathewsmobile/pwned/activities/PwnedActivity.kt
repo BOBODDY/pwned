@@ -80,7 +80,7 @@ class PwnedActivity : AppCompatActivity() {
             alertBuilder.setMessage(R.string.first_run_info)
 
             alertBuilder.setPositiveButton(R.string.ok, {
-                dialogInterface, i ->
+                dialogInterface, _ ->
                 dialogInterface.dismiss()
             })
 
