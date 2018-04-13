@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.pwn_list_cell.view.*
 
 class PwnListHolder(private val row: View): RecyclerView.ViewHolder(row) {
     fun bind(breach: Breach) = with(row, {
-        breach_name.text = breach.Name
+        breach_name.text = breach.name
 
         Glide.with(row)
                 .load(breach.getLogoUrl())

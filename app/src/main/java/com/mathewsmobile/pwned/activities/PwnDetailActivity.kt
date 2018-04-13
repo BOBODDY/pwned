@@ -65,32 +65,32 @@ class PwnDetailActivity : AppCompatActivity() {
     }
 
     private fun setupDetails(breach: Breach) {
-        detail_breach_name.text = breach.Title
-        title = breach.Title
-        detail_breach_description.text = Html.fromHtml(breach.Description, 0)
+        detail_breach_name.text = breach.title
+        title = breach.title
+        detail_breach_description.text = Html.fromHtml(breach.description, 0)
         detail_breach_description.movementMethod = LinkMovementMethod.getInstance()
-        detail_breach_date.text = breach.BreachDate
-        detail_breach_count.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(breach.PwnCount) + " affected"
+        detail_breach_date.text = breach.breachDate
+        detail_breach_count.text = NumberFormat.getNumberInstance(Locale.getDefault()).format(breach.pwnCount) + " affected"
 
-        if (breach.IsActive) {
+        if (breach.isActive) {
             detail_is_active_icon.setImageResource(R.mipmap.ic_check)
         } else {
             detail_is_active_icon.setImageResource(R.mipmap.ic_x)
         }
 
-        if (breach.IsVerified) {
+        if (breach.isVerified) {
             detail_is_verified_icon.setImageResource(R.mipmap.ic_check)
         } else {
             detail_is_verified_icon.setImageResource(R.mipmap.ic_x)
         }
 
-        if (breach.IsSpamList) {
+        if (breach.isSpamList) {
             detail_is_spam_icon.setImageResource(R.mipmap.ic_check)
         } else {
             detail_is_spam_icon.setImageResource(R.mipmap.ic_x)
         }
 
-        val compromisedData = listDataClasses(breach.DataClasses)
+        val compromisedData = listDataClasses(breach.dataClasses)
         detail_data_classes.text = compromisedData
 
         Glide.with(this)
