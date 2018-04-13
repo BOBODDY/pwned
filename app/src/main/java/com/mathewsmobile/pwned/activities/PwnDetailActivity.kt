@@ -7,6 +7,7 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import com.bumptech.glide.Glide
+import com.mathewsmobile.pwned.GlideApp
 import com.mathewsmobile.pwned.R
 import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.breachKey
@@ -93,8 +94,9 @@ class PwnDetailActivity : AppCompatActivity() {
         val compromisedData = listDataClasses(breach.dataClasses)
         detail_data_classes.text = compromisedData
 
-        Glide.with(this)
+        GlideApp.with(this)
                 .load(breach.getLogoUrl())
+                .placeholder(R.mipmap.ic_placeholder)
                 .into(detail_breach_logo)
     }
 

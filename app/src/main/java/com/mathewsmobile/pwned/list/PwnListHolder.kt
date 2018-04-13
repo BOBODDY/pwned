@@ -3,7 +3,8 @@ package com.mathewsmobile.pwned.list
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.bumptech.glide.Glide
+import com.mathewsmobile.pwned.GlideApp
+import com.mathewsmobile.pwned.R
 import com.mathewsmobile.pwned.activities.PwnDetailActivity
 import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.breachKey
@@ -17,8 +18,9 @@ class PwnListHolder(private val row: View): RecyclerView.ViewHolder(row) {
     fun bind(breach: Breach) = with(row, {
         breach_name.text = breach.name
 
-        Glide.with(row)
+        GlideApp.with(this)
                 .load(breach.getLogoUrl())
+                .placeholder(R.mipmap.ic_placeholder)
                 .into(breach_logo)
 
         row.setOnClickListener {
