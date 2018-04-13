@@ -11,10 +11,10 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
+import com.bumptech.glide.Glide
 import com.mathewsmobile.pwned.R
 import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.breachKey
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_pwn_detail.*
 import java.text.NumberFormat
 import java.util.*
@@ -127,9 +127,12 @@ class PwnDetailActivity : AppCompatActivity() {
         breachDataClasses.text = compromisedData
 
 
-        Picasso.get()
+//        Picasso.get()
+//                .load(breach.getLogoUrl())
+//                .placeholder(R.mipmap.ic_placeholder)
+//                .into(breachLogo)
+        Glide.with(this)
                 .load(breach.getLogoUrl())
-                .placeholder(R.mipmap.ic_placeholder)
                 .into(breachLogo)
     }
 
