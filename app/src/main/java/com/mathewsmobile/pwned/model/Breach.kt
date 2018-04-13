@@ -7,7 +7,7 @@ import java.io.Serializable
  * Created by nicke on 2/4/2018.
  */
 
-class Breach(
+data class Breach(
         val Title: String,
         val Name: String,
         val Domain: String,
@@ -23,6 +23,6 @@ class Breach(
         val LogoType: String) : Serializable {
 
     fun getLogoUrl (): String {
-        return imageUrl + Name + "." + LogoType
+        return "$imageUrl$Name.$LogoType"
     }
 }

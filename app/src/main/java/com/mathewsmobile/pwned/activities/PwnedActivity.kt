@@ -4,49 +4,40 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import butterknife.*
+import android.widget.AdapterView
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.api.IPwnedApi
+import com.mathewsmobile.pwned.api.PwnedApi
 import com.mathewsmobile.pwned.list.PwnListAdapter
 import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.*
+import kotlinx.android.synthetic.main.activity_pwned.*
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class PwnedActivity : AppCompatActivity() {
 
-    @BindView(R.id.account_entry)
-    lateinit var accountEntry: EditText
-
-    @BindView(R.id.pwn_check)
-    lateinit var checkButton: Button
-
-    @BindView(R.id.pwned_result)
-    lateinit var pwnedStatus: TextView
-
-    @BindView(R.id.pwn_list)
-    lateinit var pwnedList: ListView
     lateinit var pwnAdapter: PwnListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pwned)
 
-        ButterKnife.bind(this)
+        pwnAdapter = PwnListAdapter(this, emptyList())
 
-        pwnAdapter = PwnListAdapter(this)
+        pwn_list.adapter = pwnAdapter
 
-        pwnedList.adapter = pwnAdapter
+        pwn_check.setOnClickListener {
+            checkForPwnage(it)
+        }
+
+        pwn_list.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onResume() {
@@ -93,33 +84,23 @@ class PwnedActivity : AppCompatActivity() {
         }
     }
 
-    @OnClick(R.id.pwn_check)
     fun checkForPwnage(view: View) {
-        val account = accountEntry.text.toString()
+        val account = account_entry.text.toString()
 
         val backgroundTask = PwnCheckTask()
         backgroundTask.execute(account)
     }
 
-    @OnItemClick(R.id.pwn_list)
-    fun viewPwnage(position: Int) {
-        val breach = pwnAdapter.dataSet[position]
-
-        val intent = Intent(this, PwnDetailActivity::class.java)
-        intent.putExtra(breachKey, breach)
-        startActivity(intent)
-    }
-
     inner class PwnCheckTask: AsyncTask<String, Void, List<Breach>>() {
 
-        private val pwnedApi: IPwnedApi
+        private val pwnedApi: PwnedApi
 
         init {
             val retrofit = Retrofit.Builder()
                     .baseUrl(endpointUrl)
                     .addConverterFactory(MoshiConverterFactory.create())
                     .build()
-            pwnedApi = retrofit.create(IPwnedApi::class.java)
+            pwnedApi = retrofit.create(PwnedApi::class.java)
         }
 
         override fun doInBackground(vararg p0: String?): List<Breach>? {
@@ -146,16 +127,16 @@ class PwnedActivity : AppCompatActivity() {
             super.onPostExecute(result)
 
             if (result != null && result.isNotEmpty()) {
-                pwnedStatus.text = pwnedText
-                pwnedStatus.setTextColor(resources.getColor(R.color.pwnedColor))
+                pwned_result.text = pwnedText
+                pwned_result.setTextColor(resources.getColor(R.color.pwnedColor))
 
-                pwnAdapter.dataSet = result
+                pwnAdapter.data = result
                 pwnAdapter.notifyDataSetChanged()
-                pwnedList.visibility = View.VISIBLE
+                pwn_list.visibility = View.VISIBLE
             } else {
-                pwnedStatus.text = safeText
-                pwnedStatus.setTextColor(resources.getColor(R.color.safeColor))
-                pwnedList.visibility = View.GONE
+                pwned_result.text = safeText
+                pwned_result.setTextColor(resources.getColor(R.color.safeColor))
+                pwn_list.visibility = View.GONE
             }
         }
     }
