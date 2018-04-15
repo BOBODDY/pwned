@@ -1,6 +1,8 @@
 package com.mathewsmobile.pwned.list
 
+import android.app.Activity
 import android.content.Context
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +16,10 @@ import com.mathewsmobile.pwned.model.Breach
  * Created by nicke on 2/6/2018.
  */
 
-class PwnListAdapter(val context: Context, var data: List<Breach>) : RecyclerView.Adapter<PwnListHolder>() {
+class PwnListAdapter(val context: Context, var data: List<Breach>, val callback: PwnListHolder.OnActionCompleted) : RecyclerView.Adapter<PwnListHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PwnListHolder {
         val view = parent.inflate(R.layout.pwn_list_cell)
-        view.setOnClickListener {  }
-        return PwnListHolder(view)
+        return PwnListHolder(view, callback)
     }
 
     override fun getItemCount(): Int {
@@ -33,5 +34,4 @@ class PwnListAdapter(val context: Context, var data: List<Breach>) : RecyclerVie
     fun ViewGroup.inflate(layoutRes: Int): View {
         return LayoutInflater.from(context).inflate(layoutRes, this, false)
     }
-
 }

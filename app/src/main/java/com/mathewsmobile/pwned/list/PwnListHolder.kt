@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.pwn_list_cell.view.*
  * Created by nicke on 2/6/2018.
  */
 
-class PwnListHolder(private val row: View): RecyclerView.ViewHolder(row) {
+class PwnListHolder(private val row: View, val callback: OnActionCompleted): RecyclerView.ViewHolder(row) {
     fun bind(breach: Breach) = with(row, {
         breach_name.text = breach.name
 
@@ -24,10 +24,13 @@ class PwnListHolder(private val row: View): RecyclerView.ViewHolder(row) {
                 .into(breach_logo)
 
         row.setOnClickListener {
-            val context = it.context
-            val intent = Intent(context, PwnDetailActivity::class.java)
-            intent.putExtra(breachKey, breach)
-            context.startActivity(intent)
+//            val context = it.context
+//            val intent = Intent(context, PwnDetailActivity::class.java)
+//            intent.putExtra(breachKey, breach)
+//            context.startActivity(intent)
+            callback.onClick(breach)
         }
     })
+
+    interface OnActionCompleted { fun onClick(breach: Breach)}
 }
