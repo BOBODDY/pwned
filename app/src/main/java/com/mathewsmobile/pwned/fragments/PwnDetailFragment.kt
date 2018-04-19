@@ -35,7 +35,7 @@ class PwnDetailFragment: Fragment() {
 
     private fun setupDetails(breach: Breach) {
         detail_breach_name.text = breach.title
-//        title = breach.title
+        activity?.actionBar?.title = breach.title
         detail_breach_description.text = Html.fromHtml(breach.description, 0)
         detail_breach_description.movementMethod = LinkMovementMethod.getInstance()
         detail_breach_date.text = breach.breachDate

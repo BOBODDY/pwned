@@ -22,7 +22,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class PwnedFragment: Fragment(), PwnListHolder.OnActionCompleted {
+class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
+
+    lateinit var detailHandler: PwnedFragment.DetailNavigator
 
     lateinit var pwnAdapter: PwnListAdapter
 
@@ -32,6 +34,8 @@ class PwnedFragment: Fragment(), PwnListHolder.OnActionCompleted {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        activity?.actionBar?.hide()
 
         pwnAdapter = PwnListAdapter(this.requireContext(), emptyList(), this)
         pwn_list.adapter = pwnAdapter
@@ -53,15 +57,7 @@ class PwnedFragment: Fragment(), PwnListHolder.OnActionCompleted {
     }
 
     override fun onClick(breach: Breach) {
-        val detail = PwnDetailFragment()
-
-        val args = Bundle()
-        args.putSerializable(breachKey, breach)
-
-        detail.arguments = args
-
-        val fm = fragmentManager
-        fm?.beginTransaction()?.replace(R.id.fragment_container, detail)?.addToBackStack("detail")?.commit()
+        detailHandler.viewDetails(breach)
     }
 
     inner class PwnCheckTask: AsyncTask<String, Void, List<Breach>>() {
@@ -113,4 +109,6 @@ class PwnedFragment: Fragment(), PwnListHolder.OnActionCompleted {
             }
         }
     }
+
+    interface DetailNavigator { fun viewDetails(breach: Breach)}
 }

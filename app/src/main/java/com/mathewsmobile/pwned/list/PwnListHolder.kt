@@ -1,13 +1,10 @@
 package com.mathewsmobile.pwned.list
 
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.mathewsmobile.pwned.GlideApp
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.activities.PwnDetailActivity
 import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.breachKey
 import kotlinx.android.synthetic.main.pwn_list_cell.view.*
 
 /**
@@ -24,10 +21,6 @@ class PwnListHolder(private val row: View, val callback: OnActionCompleted): Rec
                 .into(breach_logo)
 
         row.setOnClickListener {
-//            val context = it.context
-//            val intent = Intent(context, PwnDetailActivity::class.java)
-//            intent.putExtra(breachKey, breach)
-//            context.startActivity(intent)
             callback.onClick(breach)
         }
     })
