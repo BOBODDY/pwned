@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.Menu
 import android.view.MenuItem
 import com.mathewsmobile.pwned.R
@@ -15,7 +16,22 @@ import com.mathewsmobile.pwned.util.breachKey
 import com.mathewsmobile.pwned.util.firstRunKey
 import com.mathewsmobile.pwned.util.sharedPrefs
 
-class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator {
+class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, FragmentManager.OnBackStackChangedListener {
+    override fun onBackStackChanged() {
+        shouldDisplayHomeUp()
+    }
+
+    fun shouldDisplayHomeUp() {
+        //Enable Up button only  if there are entries in the back stack
+        val canback = supportFragmentManager.backStackEntryCount > 0
+        supportActionBar!!.setDisplayHomeAsUpEnabled(canback)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        //This method is called when the up button is pressed. Just the pop back stack.
+        supportFragmentManager.popBackStack()
+        return true
+    }
 
     override fun createFragment(): Fragment {
         val fragment = PwnedFragment()
@@ -23,8 +39,18 @@ class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator {
         return fragment
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Handle when activity is recreated like on orientation Change
+        shouldDisplayHomeUp()
+
+        supportFragmentManager.addOnBackStackChangedListener(this)
+    }
+
     override fun onResume() {
         super.onResume()
+
+        setActionBarTitle("pwned")
 
         showInfoAlertOnFirstRun()
     }
@@ -38,11 +64,17 @@ class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator {
 
         detail.arguments = args
 
+        setActionBarTitle(breach.title)
+
         fm.beginTransaction()
-//                .add(R.id.fragment_container, detail)
-                .replace(R.id.fragment_container, detail)
-                .addToBackStack("detail")
+                .add(R.id.fragment_container, detail)
+//                .replace(R.id.fragment_container, detail)
+                .addToBackStack(null)
                 .commit()
+    }
+
+    fun setActionBarTitle(title: String) {
+        supportActionBar!!.title = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

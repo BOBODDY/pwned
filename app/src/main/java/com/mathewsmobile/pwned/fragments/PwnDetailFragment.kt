@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mathewsmobile.pwned.GlideApp
 import com.mathewsmobile.pwned.R
+import com.mathewsmobile.pwned.activities.PwnedActivity
 import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.breachKey
 import kotlinx.android.synthetic.main.content_pwn_detail.*

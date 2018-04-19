@@ -1,6 +1,5 @@
 package com.mathewsmobile.pwned.fragments
 
-import android.app.Activity
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,7 +12,6 @@ import com.mathewsmobile.pwned.api.PwnedApi
 import com.mathewsmobile.pwned.list.PwnListAdapter
 import com.mathewsmobile.pwned.list.PwnListHolder
 import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.breachKey
 import com.mathewsmobile.pwned.util.endpointUrl
 import com.mathewsmobile.pwned.util.pwnedText
 import com.mathewsmobile.pwned.util.safeText
@@ -37,6 +35,8 @@ class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
 
         activity?.actionBar?.hide()
 
+        // TODO: don't pass an emptyList(), use something from a viewmodel/saved variable
+        // This causes the list to be clobbered when coming back from the detail page as onActivityCreated is called again
         pwnAdapter = PwnListAdapter(this.requireContext(), emptyList(), this)
         pwn_list.adapter = pwnAdapter
 
