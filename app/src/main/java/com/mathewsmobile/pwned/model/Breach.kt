@@ -9,7 +9,7 @@ import java.io.Serializable
  */
 
 data class Breach(
-        @Json(name = "title") val title: String,
+        @Json(name = "Title") val title: String,
         @Json(name = "Name") val name: String,
         @Json(name = "Domain") val domain: String,
         @Json(name = "BreachDate") val breachDate: String,

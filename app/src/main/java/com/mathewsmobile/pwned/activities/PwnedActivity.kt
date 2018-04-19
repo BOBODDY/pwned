@@ -3,47 +3,78 @@ package com.mathewsmobile.pwned.activities
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.api.PwnedApi
-import com.mathewsmobile.pwned.list.PwnListAdapter
+import com.mathewsmobile.pwned.fragments.PwnDetailFragment
+import com.mathewsmobile.pwned.fragments.PwnedFragment
 import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.*
-import kotlinx.android.synthetic.main.activity_pwned.*
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import com.mathewsmobile.pwned.util.breachKey
+import com.mathewsmobile.pwned.util.firstRunKey
+import com.mathewsmobile.pwned.util.sharedPrefs
 
-class PwnedActivity : AppCompatActivity() {
+class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, FragmentManager.OnBackStackChangedListener {
+    override fun onBackStackChanged() {
+        shouldDisplayHomeUp()
+    }
 
-    lateinit var pwnAdapter: PwnListAdapter
+    fun shouldDisplayHomeUp() {
+        //Enable Up button only  if there are entries in the back stack
+        val canback = supportFragmentManager.backStackEntryCount > 0
+        supportActionBar!!.setDisplayHomeAsUpEnabled(canback)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        //This method is called when the up button is pressed. Just the pop back stack.
+        supportFragmentManager.popBackStack()
+        return true
+    }
+
+    override fun createFragment(): Fragment {
+        val fragment = PwnedFragment()
+        fragment.detailHandler = this
+        return fragment
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pwned)
+        //Handle when activity is recreated like on orientation Change
+        shouldDisplayHomeUp()
 
-        pwnAdapter = PwnListAdapter(this, emptyList())
-
-        pwn_list.adapter = pwnAdapter
-
-        pwn_check.setOnClickListener {
-            checkForPwnage(it)
-        }
-
-        pwn_list.layoutManager = LinearLayoutManager(this)
+        supportFragmentManager.addOnBackStackChangedListener(this)
     }
 
     override fun onResume() {
         super.onResume()
 
+        setActionBarTitle("pwned")
+
         showInfoAlertOnFirstRun()
+    }
+
+    override fun viewDetails(breach: Breach) {
+        val fm = supportFragmentManager
+
+        val detail = PwnDetailFragment()
+        val args = Bundle()
+        args.putSerializable(breachKey, breach)
+
+        detail.arguments = args
+
+        setActionBarTitle(breach.title)
+
+        fm.beginTransaction()
+                .add(R.id.fragment_container, detail)
+//                .replace(R.id.fragment_container, detail)
+                .addToBackStack(null)
+                .commit()
+    }
+
+    fun setActionBarTitle(title: String) {
+        supportActionBar!!.title = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -81,63 +112,6 @@ class PwnedActivity : AppCompatActivity() {
             val editor = sharedPrefs.edit()
             editor.putBoolean(firstRunKey, false)
             editor.apply()
-        }
-    }
-
-    fun checkForPwnage(view: View) {
-        val account = account_entry.text.toString()
-
-        val backgroundTask = PwnCheckTask()
-        backgroundTask.execute(account)
-    }
-
-    inner class PwnCheckTask: AsyncTask<String, Void, List<Breach>>() {
-
-        private val pwnedApi: PwnedApi
-
-        init {
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(endpointUrl)
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .build()
-            pwnedApi = retrofit.create(PwnedApi::class.java)
-        }
-
-        override fun doInBackground(vararg p0: String?): List<Breach>? {
-            val account = p0[0]
-
-            var response: Response<List<Breach>>? = null
-            if (account != null) {
-
-                try {
-                    response = pwnedApi.getBreachesForAccount(account).execute()
-                } catch (e: Exception) {
-                    print(e.localizedMessage)
-                }
-
-                if (response != null && response.isSuccessful) {
-                    return response.body()
-                }
-            }
-
-            return response?.body()
-        }
-
-        override fun onPostExecute(result: List<Breach>?) {
-            super.onPostExecute(result)
-
-            if (result != null && result.isNotEmpty()) {
-                pwned_result.text = pwnedText
-                pwned_result.setTextColor(resources.getColor(R.color.pwnedColor))
-
-                pwnAdapter.data = result
-                pwnAdapter.notifyDataSetChanged()
-                pwn_list.visibility = View.VISIBLE
-            } else {
-                pwned_result.text = safeText
-                pwned_result.setTextColor(resources.getColor(R.color.safeColor))
-                pwn_list.visibility = View.GONE
-            }
         }
     }
 }
