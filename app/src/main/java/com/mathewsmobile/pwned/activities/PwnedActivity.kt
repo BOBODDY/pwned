@@ -1,6 +1,7 @@
 package com.mathewsmobile.pwned.activities
 
 import android.app.AlertDialog
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,8 +16,45 @@ import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.breachKey
 import com.mathewsmobile.pwned.util.firstRunKey
 import com.mathewsmobile.pwned.util.sharedPrefs
+import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
 
 class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, FragmentManager.OnBackStackChangedListener {
+
+    lateinit var viewModel: PwnedViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Handle when activity is recreated like on orientation Change
+        shouldDisplayHomeUp()
+
+        supportFragmentManager.addOnBackStackChangedListener(this)
+
+        viewModel = ViewModelProviders.of(this).get(PwnedViewModel::class.java)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setActionBarTitle("pwned")
+
+        showInfoAlertOnFirstRun()
+    }
+
+    override fun viewDetails(breach: Breach) {
+        val fm = supportFragmentManager
+
+        val detail = PwnDetailFragment()
+
+        viewModel.getSelectedBreach().value = breach
+
+        setActionBarTitle(breach.title)
+
+        fm.beginTransaction()
+                .add(R.id.fragment_container, detail)
+                .addToBackStack(null)
+                .commit()
+    }
+
     override fun onBackStackChanged() {
         shouldDisplayHomeUp()
     }
@@ -37,40 +75,6 @@ class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, F
         val fragment = PwnedFragment()
         fragment.detailHandler = this
         return fragment
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //Handle when activity is recreated like on orientation Change
-        shouldDisplayHomeUp()
-
-        supportFragmentManager.addOnBackStackChangedListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        setActionBarTitle("pwned")
-
-        showInfoAlertOnFirstRun()
-    }
-
-    override fun viewDetails(breach: Breach) {
-        val fm = supportFragmentManager
-
-        val detail = PwnDetailFragment()
-        val args = Bundle()
-        args.putSerializable(breachKey, breach)
-
-        detail.arguments = args
-
-        setActionBarTitle(breach.title)
-
-        fm.beginTransaction()
-                .add(R.id.fragment_container, detail)
-//                .replace(R.id.fragment_container, detail)
-                .addToBackStack(null)
-                .commit()
     }
 
     fun setActionBarTitle(title: String) {

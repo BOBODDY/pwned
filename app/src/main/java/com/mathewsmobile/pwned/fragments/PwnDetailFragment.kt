@@ -1,6 +1,7 @@
 package com.mathewsmobile.pwned.fragments
 
 import android.app.AlertDialog
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Html
@@ -8,11 +9,10 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mathewsmobile.pwned.GlideApp
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.activities.PwnedActivity
+import com.mathewsmobile.pwned.images.GlideApp
 import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.breachKey
+import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
 import kotlinx.android.synthetic.main.content_pwn_detail.*
 import java.text.NumberFormat
 import java.util.*
@@ -30,8 +30,10 @@ class PwnDetailFragment: Fragment() {
             showWhatTheseMean()
         }
 
-        val breach = arguments?.getSerializable(breachKey) as Breach
-        setupDetails(breach)
+        val vm = ViewModelProviders.of(activity!!).get(PwnedViewModel::class.java)
+        vm.getSelectedBreach().observe(this, android.arch.lifecycle.Observer { breach ->
+            setupDetails(breach!!)
+        })
     }
 
     private fun setupDetails(breach: Breach) {

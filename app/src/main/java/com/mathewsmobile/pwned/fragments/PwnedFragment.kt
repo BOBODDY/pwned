@@ -1,5 +1,7 @@
 package com.mathewsmobile.pwned.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mathewsmobile.pwned.R
+import com.mathewsmobile.pwned.activities.PwnedActivity
 import com.mathewsmobile.pwned.api.PwnedApi
 import com.mathewsmobile.pwned.list.PwnListAdapter
 import com.mathewsmobile.pwned.list.PwnListHolder
@@ -15,6 +18,7 @@ import com.mathewsmobile.pwned.model.Breach
 import com.mathewsmobile.pwned.util.endpointUrl
 import com.mathewsmobile.pwned.util.pwnedText
 import com.mathewsmobile.pwned.util.safeText
+import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
 import kotlinx.android.synthetic.main.activity_pwned.*
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -24,7 +28,9 @@ class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
 
     lateinit var detailHandler: PwnedFragment.DetailNavigator
 
-    lateinit var pwnAdapter: PwnListAdapter
+    var pwnAdapter: PwnListAdapter? = null
+
+    lateinit var viewModel: PwnedViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_pwned, container, false)
@@ -34,14 +40,16 @@ class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
         super.onActivityCreated(savedInstanceState)
 
         activity?.actionBar?.hide()
+        detailHandler = activity as PwnedActivity
 
-        // TODO: don't pass an emptyList(), use something from a viewmodel/saved variable
-        // This causes the list to be clobbered when coming back from the detail page as onActivityCreated is called again
-        pwnAdapter = PwnListAdapter(this.requireContext(), emptyList(), this)
-        pwn_list.adapter = pwnAdapter
+        viewModel = ViewModelProviders.of(activity!!).get(PwnedViewModel::class.java)
+
+        viewModel.getBreaches().observe(this, Observer { breaches ->
+            updateList(breaches)
+        })
 
         pwn_check.setOnClickListener {
-            checkForPwnage()
+            viewModel.checkForPwn(account_entry.text.toString())
         }
 
         if (context != null) {
@@ -49,65 +57,32 @@ class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
         }
     }
 
-    fun checkForPwnage() {
-        val account = account_entry.text.toString()
+    fun updateList(breaches: List<Breach>?) {
+        if (breaches == null) {
+            return
+        }
 
-        val backgroundTask = PwnCheckTask()
-        backgroundTask.execute(account)
+        if (pwnAdapter == null) {
+            pwnAdapter = PwnListAdapter(this.requireContext(), emptyList(), this)
+            pwn_list.adapter = pwnAdapter
+        }
+
+        pwnAdapter!!.data = breaches
+        pwnAdapter!!.notifyDataSetChanged()
+
+        if (breaches.isNotEmpty()) {
+            pwned_result.text = pwnedText
+            pwned_result.setTextColor(resources.getColor(R.color.pwnedColor))
+            pwn_list.visibility = View.VISIBLE
+        } else {
+            pwned_result.text = safeText
+            pwned_result.setTextColor(resources.getColor(R.color.safeColor))
+            pwn_list.visibility = View.GONE
+        }
     }
 
     override fun onClick(breach: Breach) {
         detailHandler.viewDetails(breach)
-    }
-
-    inner class PwnCheckTask: AsyncTask<String, Void, List<Breach>>() {
-
-        private val pwnedApi: PwnedApi
-
-        init {
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(endpointUrl)
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .build()
-            pwnedApi = retrofit.create(PwnedApi::class.java)
-        }
-
-        override fun doInBackground(vararg p0: String?): List<Breach>? {
-            val account = p0[0]
-
-            var response: Response<List<Breach>>? = null
-            if (account != null) {
-
-                try {
-                    response = pwnedApi.getBreachesForAccount(account).execute()
-                } catch (e: Exception) {
-                    print(e.localizedMessage)
-                }
-
-                if (response != null && response.isSuccessful) {
-                    return response.body()
-                }
-            }
-
-            return response?.body()
-        }
-
-        override fun onPostExecute(result: List<Breach>?) {
-            super.onPostExecute(result)
-
-            if (result != null && result.isNotEmpty()) {
-                pwned_result.text = pwnedText
-                pwned_result.setTextColor(resources.getColor(R.color.pwnedColor))
-
-                pwnAdapter.data = result
-                pwnAdapter.notifyDataSetChanged()
-                pwn_list.visibility = View.VISIBLE
-            } else {
-                pwned_result.text = safeText
-                pwned_result.setTextColor(resources.getColor(R.color.safeColor))
-                pwn_list.visibility = View.GONE
-            }
-        }
     }
 
     interface DetailNavigator { fun viewDetails(breach: Breach)}
