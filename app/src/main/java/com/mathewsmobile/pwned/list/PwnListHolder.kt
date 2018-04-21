@@ -1,24 +1,29 @@
 package com.mathewsmobile.pwned.list
 
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.mathewsmobile.pwned.R
+import com.mathewsmobile.pwned.images.GlideApp
+import com.mathewsmobile.pwned.model.Breach
+import kotlinx.android.synthetic.main.pwn_list_cell.view.*
 
 /**
  * Created by nicke on 2/6/2018.
  */
 
-class PwnListHolder(row: View) {
-    @BindView(R.id.breach_name)
-    lateinit var label: TextView
+class PwnListHolder(private val row: View, val callback: OnActionCompleted): RecyclerView.ViewHolder(row) {
+    fun bind(breach: Breach) = with(row, {
+        breach_name.text = breach.name
 
-    @BindView(R.id.breach_logo)
-    lateinit var logo: ImageView
+        GlideApp.with(this)
+                .load(breach.getLogoUrl())
+                .placeholder(R.mipmap.ic_placeholder)
+                .into(breach_logo)
 
-    init {
-        ButterKnife.bind(this, row)
-    }
+        row.setOnClickListener {
+            callback.onClick(breach)
+        }
+    })
+
+    interface OnActionCompleted { fun onClick(breach: Breach)}
 }

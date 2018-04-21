@@ -1,28 +1,29 @@
 package com.mathewsmobile.pwned.model
 
 import com.mathewsmobile.pwned.util.imageUrl
+import com.squareup.moshi.Json
 import java.io.Serializable
 
 /**
  * Created by nicke on 2/4/2018.
  */
 
-class Breach(
-        val Title: String,
-        val Name: String,
-        val Domain: String,
-        val BreachDate: String,
-        val PwnCount: Int,
-        val Description: String,
-        val DataClasses: List<String>,
-        val IsVerified: Boolean,
-        val IsFabricated: Boolean,
-        val IsSensitive: Boolean,
-        val IsActive: Boolean,
-        val IsSpamList: Boolean,
-        val LogoType: String) : Serializable {
+data class Breach(
+        @Json(name = "Title") val title: String,
+        @Json(name = "Name") val name: String,
+        @Json(name = "Domain") val domain: String,
+        @Json(name = "BreachDate") val breachDate: String,
+        @Json(name = "PwnCount") val pwnCount: Int,
+        @Json(name = "Description") val description: String,
+        @Json(name = "DataClasses") val dataClasses: List<String>,
+        @Json(name = "IsVerified") val isVerified: Boolean,
+        @Json(name = "IsFabricated") val isFabricated: Boolean,
+        @Json(name = "IsSensitive") val isSensitive: Boolean,
+        @Json(name = "IsActive") val isActive: Boolean,
+        @Json(name = "IsSpamList") val isSpamList: Boolean,
+        @Json(name = "LogoType") val logoType: String) : Serializable {
 
     fun getLogoUrl (): String {
-        return imageUrl + Name + "." + LogoType
+        return "$imageUrl$name.$logoType"
     }
 }

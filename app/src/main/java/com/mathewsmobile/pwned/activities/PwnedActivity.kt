@@ -1,58 +1,84 @@
 package com.mathewsmobile.pwned.activities
 
 import android.app.AlertDialog
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import butterknife.*
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.api.IPwnedApi
-import com.mathewsmobile.pwned.list.PwnListAdapter
+import com.mathewsmobile.pwned.fragments.PwnDetailFragment
+import com.mathewsmobile.pwned.fragments.PwnedFragment
 import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.*
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import com.mathewsmobile.pwned.util.breachKey
+import com.mathewsmobile.pwned.util.firstRunKey
+import com.mathewsmobile.pwned.util.sharedPrefs
+import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
 
-class PwnedActivity : AppCompatActivity() {
+class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, FragmentManager.OnBackStackChangedListener {
 
-    @BindView(R.id.account_entry)
-    lateinit var accountEntry: EditText
-
-    @BindView(R.id.pwn_check)
-    lateinit var checkButton: Button
-
-    @BindView(R.id.pwned_result)
-    lateinit var pwnedStatus: TextView
-
-    @BindView(R.id.pwn_list)
-    lateinit var pwnedList: ListView
-    lateinit var pwnAdapter: PwnListAdapter
+    lateinit var viewModel: PwnedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pwned)
+        //Handle when activity is recreated like on orientation Change
+        shouldDisplayHomeUp()
 
-        ButterKnife.bind(this)
+        supportFragmentManager.addOnBackStackChangedListener(this)
 
-        pwnAdapter = PwnListAdapter(this)
-
-        pwnedList.adapter = pwnAdapter
+        viewModel = ViewModelProviders.of(this).get(PwnedViewModel::class.java)
     }
 
     override fun onResume() {
         super.onResume()
 
+        setActionBarTitle("pwned")
+
         showInfoAlertOnFirstRun()
+    }
+
+    override fun viewDetails(breach: Breach) {
+        val fm = supportFragmentManager
+
+        val detail = PwnDetailFragment()
+
+        viewModel.getSelectedBreach().value = breach
+
+        setActionBarTitle(breach.title)
+
+        fm.beginTransaction()
+                .add(R.id.fragment_container, detail)
+                .addToBackStack(null)
+                .commit()
+    }
+
+    override fun onBackStackChanged() {
+        shouldDisplayHomeUp()
+    }
+
+    fun shouldDisplayHomeUp() {
+        //Enable Up button only  if there are entries in the back stack
+        val canback = supportFragmentManager.backStackEntryCount > 0
+        supportActionBar!!.setDisplayHomeAsUpEnabled(canback)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        //This method is called when the up button is pressed. Just the pop back stack.
+        supportFragmentManager.popBackStack()
+        return true
+    }
+
+    override fun createFragment(): Fragment {
+        val fragment = PwnedFragment()
+        fragment.detailHandler = this
+        return fragment
+    }
+
+    fun setActionBarTitle(title: String) {
+        supportActionBar!!.title = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -90,73 +116,6 @@ class PwnedActivity : AppCompatActivity() {
             val editor = sharedPrefs.edit()
             editor.putBoolean(firstRunKey, false)
             editor.apply()
-        }
-    }
-
-    @OnClick(R.id.pwn_check)
-    fun checkForPwnage(view: View) {
-        val account = accountEntry.text.toString()
-
-        val backgroundTask = PwnCheckTask()
-        backgroundTask.execute(account)
-    }
-
-    @OnItemClick(R.id.pwn_list)
-    fun viewPwnage(position: Int) {
-        val breach = pwnAdapter.dataSet[position]
-
-        val intent = Intent(this, PwnDetailActivity::class.java)
-        intent.putExtra(breachKey, breach)
-        startActivity(intent)
-    }
-
-    inner class PwnCheckTask: AsyncTask<String, Void, List<Breach>>() {
-
-        private val pwnedApi: IPwnedApi
-
-        init {
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(endpointUrl)
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .build()
-            pwnedApi = retrofit.create(IPwnedApi::class.java)
-        }
-
-        override fun doInBackground(vararg p0: String?): List<Breach>? {
-            val account = p0[0]
-
-            var response: Response<List<Breach>>? = null
-            if (account != null) {
-
-                try {
-                    response = pwnedApi.getBreachesForAccount(account).execute()
-                } catch (e: Exception) {
-                    print(e.localizedMessage)
-                }
-
-                if (response != null && response.isSuccessful) {
-                    return response.body()
-                }
-            }
-
-            return response?.body()
-        }
-
-        override fun onPostExecute(result: List<Breach>?) {
-            super.onPostExecute(result)
-
-            if (result != null && result.isNotEmpty()) {
-                pwnedStatus.text = pwnedText
-                pwnedStatus.setTextColor(resources.getColor(R.color.pwnedColor))
-
-                pwnAdapter.dataSet = result
-                pwnAdapter.notifyDataSetChanged()
-                pwnedList.visibility = View.VISIBLE
-            } else {
-                pwnedStatus.text = safeText
-                pwnedStatus.setTextColor(resources.getColor(R.color.safeColor))
-                pwnedList.visibility = View.GONE
-            }
         }
     }
 }

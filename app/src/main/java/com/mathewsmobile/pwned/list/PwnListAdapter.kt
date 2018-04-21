@@ -1,6 +1,9 @@
 package com.mathewsmobile.pwned.list
 
+import android.app.Activity
 import android.content.Context
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,54 +11,27 @@ import android.widget.BaseAdapter
 import com.bumptech.glide.Glide
 import com.mathewsmobile.pwned.R
 import com.mathewsmobile.pwned.model.Breach
-import com.squareup.picasso.Picasso
 
 /**
  * Created by nicke on 2/6/2018.
  */
 
-class PwnListAdapter(val context: Context) : BaseAdapter() {
-
-    var dataSet: List<Breach> = emptyList()
-
-    private val inflator: LayoutInflater = LayoutInflater.from(context)
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val breach = dataSet[position]
-        var view = convertView
-        var viewHolder: PwnListHolder?
-
-        if (view != null) {
-            viewHolder = view.tag as PwnListHolder
-        } else {
-            view = inflator.inflate(R.layout.pwn_list_cell, parent, false)
-            viewHolder = PwnListHolder(view)
-            view.tag = viewHolder
-        }
-
-        viewHolder.label.text = breach.Title
-
-        // TODO: figure out how to load SVGs using Picasso
-//        Picasso.get()
-//                .load(breach.getLogoUrl())
-//                .placeholder(R.mipmap.ic_placeholder)
-//                .into(viewHolder.logo)
-        Glide.with(context)
-                .load(breach.getLogoUrl())
-                .into(viewHolder.logo)
-        return view!!
+class PwnListAdapter(val context: Context, var data: List<Breach>, val callback: PwnListHolder.OnActionCompleted) : RecyclerView.Adapter<PwnListHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PwnListHolder {
+        val view = parent.inflate(R.layout.pwn_list_cell)
+        return PwnListHolder(view, callback)
     }
 
-    override fun getItem(p0: Int): Any {
-        return dataSet[p0]
+    override fun getItemCount(): Int {
+        return data.size
     }
 
-    override fun getItemId(p0: Int): Long {
-        return p0.toLong()
+    override fun onBindViewHolder(holder: PwnListHolder, position: Int) {
+        holder.bind(data[position])
     }
 
-    override fun getCount(): Int {
-        return dataSet.size
+    // Inspired by https://antonioleiva.com/extension-functions-kotlin/
+    fun ViewGroup.inflate(layoutRes: Int): View {
+        return LayoutInflater.from(context).inflate(layoutRes, this, false)
     }
-
 }

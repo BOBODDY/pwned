@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "133468851091",
+    "firebase_url": "https://pwned-9a549.firebaseio.com",
+    "project_id": "pwned-9a549",
+    "storage_bucket": "pwned-9a549.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133468851091:android:1a0b9ad363a14df1",
+        "android_client_info": {
+          "package_name": "com.boboddy.pwned"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133468851091-o4uc8kr361nc6b4bep5qgcmng3mdb0qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf-BeXaG5loI_xtUKbX1sbvMt9va2PbIc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133468851091:android:a14b0845edd947a2",
+        "android_client_info": {
+          "package_name": "com.mathewsmobile.pwned"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133468851091-o4uc8kr361nc6b4bep5qgcmng3mdb0qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf-BeXaG5loI_xtUKbX1sbvMt9va2PbIc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

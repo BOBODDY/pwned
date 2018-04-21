@@ -7,4 +7,6 @@
 
     <color name="pwnedColor">#9b2626</color>
     <color name="safeColor">#269b51</color>
+
+    <color name="white">#ffffff</color>
 </resources>
