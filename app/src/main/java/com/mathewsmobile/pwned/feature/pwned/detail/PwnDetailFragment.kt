@@ -10,9 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.images.GlideApp
 import com.mathewsmobile.pwned.shared.model.Breach
 import com.mathewsmobile.pwned.feature.pwned.PwnedViewModel
+import com.mathewsmobile.pwned.shared.GlideApp
 import kotlinx.android.synthetic.main.content_pwn_detail.*
 import java.text.NumberFormat
 import java.util.*
