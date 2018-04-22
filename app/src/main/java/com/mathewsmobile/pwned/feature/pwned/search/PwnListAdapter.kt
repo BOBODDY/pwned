@@ -1,16 +1,12 @@
-package com.mathewsmobile.pwned.list
+package com.mathewsmobile.pwned.feature.pwned.search
 
-import android.app.Activity
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import com.bumptech.glide.Glide
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.model.Breach
+import com.mathewsmobile.pwned.shared.model.Breach
 
 /**
  * Created by nicke on 2/6/2018.

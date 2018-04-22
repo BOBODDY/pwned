@@ -1,4 +1,4 @@
-package com.mathewsmobile.pwned.images;
+package com.mathewsmobile.pwned.shared;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

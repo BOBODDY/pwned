@@ -1,10 +1,10 @@
-package com.mathewsmobile.pwned.list
+package com.mathewsmobile.pwned.feature.pwned.search
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.images.GlideApp
-import com.mathewsmobile.pwned.model.Breach
+import com.mathewsmobile.pwned.shared.GlideApp
+import com.mathewsmobile.pwned.shared.model.Breach
 import kotlinx.android.synthetic.main.pwn_list_cell.view.*
 
 /**

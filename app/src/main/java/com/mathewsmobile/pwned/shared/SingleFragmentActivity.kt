@@ -1,4 +1,4 @@
-package com.mathewsmobile.pwned.activities
+package com.mathewsmobile.pwned.shared
 
 import android.os.Bundle
 import android.os.PersistableBundle

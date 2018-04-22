@@ -1,6 +1,6 @@
-package com.mathewsmobile.pwned.model
+package com.mathewsmobile.pwned.shared.model
 
-import com.mathewsmobile.pwned.util.imageUrl
+import com.mathewsmobile.pwned.constants.imageUrl
 import com.squareup.moshi.Json
 import java.io.Serializable
 
@@ -24,6 +24,6 @@ data class Breach(
         @Json(name = "LogoType") val logoType: String) : Serializable {
 
     fun getLogoUrl (): String {
-        return "$imageUrl$name.$logoType"
+        return "${imageUrl}$name.$logoType"
     }
 }

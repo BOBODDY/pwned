@@ -1,11 +1,10 @@
-package com.mathewsmobile.pwned.viewmodels
+package com.mathewsmobile.pwned.feature.pwned
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.os.AsyncTask
-import com.mathewsmobile.pwned.api.PwnedApi
-import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.endpointUrl
+import com.mathewsmobile.pwned.shared.model.Breach
+import com.mathewsmobile.pwned.constants.endpointUrl
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

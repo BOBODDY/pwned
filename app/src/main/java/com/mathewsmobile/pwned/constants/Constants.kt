@@ -1,4 +1,4 @@
-package com.mathewsmobile.pwned.util
+package com.mathewsmobile.pwned.constants
 
 import android.graphics.Color
 
