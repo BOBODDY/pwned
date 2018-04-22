@@ -18,11 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.mathewsmobile.pwned.activities.PwnDetailActivity"
-            android:label="@string/title_activity_pwn_detail"
-            android:parentActivityName="com.mathewsmobile.pwned.feature.pwned.PwnedActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mathewsmobile.pwned.feature.info.InfoActivity" />
     </application>
 
