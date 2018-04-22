@@ -1,8 +1,7 @@
-package com.mathewsmobile.pwned.fragments
+package com.mathewsmobile.pwned.feature.pwned.search
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,23 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.activities.PwnedActivity
-import com.mathewsmobile.pwned.api.PwnedApi
-import com.mathewsmobile.pwned.list.PwnListAdapter
-import com.mathewsmobile.pwned.list.PwnListHolder
-import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.endpointUrl
-import com.mathewsmobile.pwned.util.pwnedText
-import com.mathewsmobile.pwned.util.safeText
-import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
+import com.mathewsmobile.pwned.feature.pwned.PwnedActivity
+import com.mathewsmobile.pwned.shared.model.Breach
+import com.mathewsmobile.pwned.constants.pwnedText
+import com.mathewsmobile.pwned.constants.safeText
+import com.mathewsmobile.pwned.feature.pwned.PwnedViewModel
 import kotlinx.android.synthetic.main.activity_pwned.*
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
 
-    lateinit var detailHandler: PwnedFragment.DetailNavigator
+    lateinit var detailHandler: DetailNavigator
 
     var pwnAdapter: PwnListAdapter? = null
 

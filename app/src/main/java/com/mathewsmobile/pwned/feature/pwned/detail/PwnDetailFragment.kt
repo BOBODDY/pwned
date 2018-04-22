@@ -1,4 +1,4 @@
-package com.mathewsmobile.pwned.fragments
+package com.mathewsmobile.pwned.feature.pwned.detail
 
 import android.app.AlertDialog
 import android.arch.lifecycle.ViewModelProviders
@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.mathewsmobile.pwned.R
 import com.mathewsmobile.pwned.images.GlideApp
-import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
+import com.mathewsmobile.pwned.shared.model.Breach
+import com.mathewsmobile.pwned.feature.pwned.PwnedViewModel
 import kotlinx.android.synthetic.main.content_pwn_detail.*
 import java.text.NumberFormat
 import java.util.*

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.mathewsmobile.pwned.fragments.PwnDetailFragment"
+    tools:context="com.mathewsmobile.pwned.feature.pwned.detail.PwnDetailFragment"
     tools:showIn="@layout/activity_pwn_detail"
     android:background="@color/white">
 

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name="com.mathewsmobile.pwned.activities.PwnedActivity">
+        <activity android:name="com.mathewsmobile.pwned.feature.pwned.PwnedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,9 +21,9 @@
         <activity
             android:name="com.mathewsmobile.pwned.activities.PwnDetailActivity"
             android:label="@string/title_activity_pwn_detail"
-            android:parentActivityName="com.mathewsmobile.pwned.activities.PwnedActivity"
+            android:parentActivityName="com.mathewsmobile.pwned.feature.pwned.PwnedActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.mathewsmobile.pwned.activities.InfoActivity" />
+        <activity android:name="com.mathewsmobile.pwned.feature.info.InfoActivity" />
     </application>
 
 </manifest>

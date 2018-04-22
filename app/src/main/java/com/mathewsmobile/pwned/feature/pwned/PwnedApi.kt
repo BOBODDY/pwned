@@ -1,6 +1,6 @@
-package com.mathewsmobile.pwned.api
+package com.mathewsmobile.pwned.feature.pwned
 
-import com.mathewsmobile.pwned.model.Breach
+import com.mathewsmobile.pwned.shared.model.Breach
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

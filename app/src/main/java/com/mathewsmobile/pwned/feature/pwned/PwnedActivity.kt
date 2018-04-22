@@ -1,4 +1,4 @@
-package com.mathewsmobile.pwned.activities
+package com.mathewsmobile.pwned.feature.pwned
 
 import android.app.AlertDialog
 import android.arch.lifecycle.ViewModelProviders
@@ -10,13 +10,13 @@ import android.support.v4.app.FragmentManager
 import android.view.Menu
 import android.view.MenuItem
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.fragments.PwnDetailFragment
-import com.mathewsmobile.pwned.fragments.PwnedFragment
-import com.mathewsmobile.pwned.model.Breach
-import com.mathewsmobile.pwned.util.breachKey
-import com.mathewsmobile.pwned.util.firstRunKey
-import com.mathewsmobile.pwned.util.sharedPrefs
-import com.mathewsmobile.pwned.viewmodels.PwnedViewModel
+import com.mathewsmobile.pwned.feature.info.InfoActivity
+import com.mathewsmobile.pwned.feature.pwned.detail.PwnDetailFragment
+import com.mathewsmobile.pwned.feature.pwned.search.PwnedFragment
+import com.mathewsmobile.pwned.shared.model.Breach
+import com.mathewsmobile.pwned.constants.firstRunKey
+import com.mathewsmobile.pwned.constants.sharedPrefs
+import com.mathewsmobile.pwned.shared.SingleFragmentActivity
 
 class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, FragmentManager.OnBackStackChangedListener {
 

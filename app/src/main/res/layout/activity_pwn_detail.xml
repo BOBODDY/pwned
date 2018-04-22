@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    tools:context="com.mathewsmobile.pwned.fragments.PwnDetailFragment">
+    tools:context="com.mathewsmobile.pwned.feature.pwned.detail.PwnDetailFragment">
 
     <include layout="@layout/content_pwn_detail" />
 

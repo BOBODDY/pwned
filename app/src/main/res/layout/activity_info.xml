@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mathewsmobile.pwned.activities.InfoActivity">
+    tools:context="com.mathewsmobile.pwned.feature.info.InfoActivity">
 
     <ImageView
         android:id="@+id/info_logo"

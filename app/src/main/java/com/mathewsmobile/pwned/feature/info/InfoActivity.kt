@@ -1,4 +1,4 @@
-package com.mathewsmobile.pwned.activities
+package com.mathewsmobile.pwned.feature.info
 
 import android.content.pm.PackageManager
 import android.os.Bundle
