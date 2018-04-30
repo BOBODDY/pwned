@@ -6,6 +6,8 @@
     android:clickable="true"
     tools:context="com.mathewsmobile.pwned.feature.pwned.detail.PwnDetailFragment">
 
-    <include layout="@layout/content_pwn_detail" />
+    <include layout="@layout/content_pwn_detail"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 </android.support.design.widget.CoordinatorLayout>
