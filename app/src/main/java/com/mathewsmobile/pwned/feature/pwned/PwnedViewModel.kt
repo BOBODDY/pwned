@@ -10,7 +10,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class PwnedViewModel: ViewModel() {
-    private var userEmail: MutableLiveData<String>? = null
     private var breaches: MutableLiveData<List<Breach>>? = null
     private var selectedBreach: MutableLiveData<Breach>? = null
 
@@ -26,13 +25,6 @@ class PwnedViewModel: ViewModel() {
             selectedBreach = MutableLiveData()
         }
         return selectedBreach!!
-    }
-
-    fun getEmail(): MutableLiveData<String> {
-        if (userEmail == null) {
-            userEmail = MutableLiveData()
-        }
-        return userEmail!!
     }
 
     fun checkForPwn(email: String) {
