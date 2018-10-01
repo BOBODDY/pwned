@@ -9,15 +9,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import com.mathewsmobile.pwned.R
-import com.mathewsmobile.pwned.feature.pwned.PwnedActivity
-import com.mathewsmobile.pwned.shared.model.Breach
 import com.mathewsmobile.pwned.constants.pwnedText
 import com.mathewsmobile.pwned.constants.safeText
+import com.mathewsmobile.pwned.feature.pwned.PwnedActivity
 import com.mathewsmobile.pwned.feature.pwned.PwnedViewModel
+import com.mathewsmobile.pwned.shared.model.Breach
 import kotlinx.android.synthetic.main.activity_pwned.*
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.view.inputmethod.InputMethodManager
 
 
 class PwnedFragment : Fragment(), PwnListHolder.OnActionCompleted {
