@@ -63,6 +63,10 @@ class PwnedActivity : SingleFragmentActivity(), PwnedFragment.DetailNavigator, F
         //Enable Up button only  if there are entries in the back stack
         val canback = supportFragmentManager.backStackEntryCount > 0
         supportActionBar!!.setDisplayHomeAsUpEnabled(canback)
+
+        if (!canback) { // Back on the home screen
+            setActionBarTitle("pwned")
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
