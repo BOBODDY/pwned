@@ -15,7 +15,8 @@ class InfoActivity : AppCompatActivity() {
         try {
             val pInfo = this.packageManager.getPackageInfo(packageName, 0)
             val version = pInfo.versionName
-            info_version.text = version
+            val build = pInfo.longVersionCode
+            info_version.text = "$version ($build)"
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
